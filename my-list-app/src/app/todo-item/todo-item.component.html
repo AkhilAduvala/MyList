@@ -1,5 +1,6 @@
-<tr>
-    <td>{{ toDo.id }}</td>
-    <td>{{ toDo.title }}</td>
-    <td>{{ toDo.status }}</td>
-</tr>
+<td>{{ toDo.id }}</td>
+<td>{{ toDo.title }}</td>
+<td>{{ toDo.status }}</td>
+<td>
+  <button (click)="onDelete()">Remove Task</button>
+</td>

@@ -4,11 +4,12 @@
       <th>Task Id</th>
       <th>Title</th>
       <th>Status</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     @for (item of toDoQueue; track item.id) {
-      <app-todo-item [toDo]="item"></app-todo-item>
+      <tr app-todo-item [toDo]="item" (deleteToDo)="handleDelete($event)"></tr>
     }
   </tbody>
 </table>
