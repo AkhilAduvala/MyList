@@ -1,0 +1,14 @@
+<table>
+  <thead>
+    <tr>
+      <th>Task Id</th>
+      <th>Title</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of toDoQueue; track item.id) {
+      <app-todo-item [toDo]="item"></app-todo-item>
+    }
+  </tbody>
+</table>
