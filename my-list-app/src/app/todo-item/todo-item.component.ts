@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { ToDo } from '../models/todo.model';
 
 @Component({
@@ -9,7 +9,7 @@ import { ToDo } from '../models/todo.model';
   styleUrl: './todo-item.component.css'
 })
 
-export class TodoItemComponent {
+export class TodoItemComponent implements OnChanges, OnDestroy{
   @Input() toDo !: ToDo;
 
   @Output() deleteToDo = new EventEmitter<number>();
@@ -18,5 +18,13 @@ export class TodoItemComponent {
     alert('Delete clicked!');
     console.log(`we are trying to delete item`);
     this.deleteToDo.emit(this.toDo.id);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+      console.log("Changes detected ", changes['toDo']);
+  }
+
+  ngOnDestroy(): void {
+      console.log(`ToDo with id ${this.toDo.id} is being destroyed`);
   }
 }

@@ -13,3 +13,12 @@
     }
   </tbody>
 </table>
+
+<form>
+  <input type="text" id="newToDo" name="newToDo" [(ngModel)] = "newToDo">
+  <button type="submit" [disabled] = "!newToDo" (click)="addNewToDo(newToDo)">Add ToDo</button>
+</form>
+
+<p>Preview: {{ newToDo }}</p>
+
+
