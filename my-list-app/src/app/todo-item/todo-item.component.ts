@@ -1,18 +1,26 @@
-import { Component, EventEmitter, Input, Output, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges, OnDestroy, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { ToDo } from '../models/todo.model';
 
 @Component({
   selector: '[app-todo-item]',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   templateUrl: './todo-item.component.html',
   styleUrl: './todo-item.component.css'
 })
 
 export class TodoItemComponent implements OnChanges, OnDestroy{
+  
   @Input() toDo !: ToDo;
 
   @Output() deleteToDo = new EventEmitter<number>();
+
+  @Output() statusUpdate = new EventEmitter<number>();
+
+  updateStatus() {
+    this.statusUpdate.emit(this.toDo.id);
+  }
 
   onDelete(){
     alert('Delete clicked!');

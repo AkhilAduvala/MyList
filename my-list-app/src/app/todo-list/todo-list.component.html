@@ -9,7 +9,7 @@
   </thead>
   <tbody>
     @for (item of toDoQueue; track item.id) {
-      <tr app-todo-item [toDo]="item" (deleteToDo)="handleDelete($event)"></tr>
+      <tr app-todo-item [toDo]="item" (deleteToDo)="handleDelete($event)" (statusUpdate)="markAsComplete($event)"></tr>
     }
   </tbody>
 </table>

@@ -33,6 +33,24 @@ export class TodoListComponent implements OnInit{
     this.toDoQueue = this.toDoQueue.filter(item => item.id !== id);
   }
 
+  markAsComplete(id: number) {
+    
+    /*
+    //mutation without reference change, so it will not reflect on UI
+
+    const todo = this.toDoQueue.find(t => t.id === id);
+    if (todo) {
+      //todo.status = 'Completed'; 
+    }
+    */
+
+    this.toDoQueue = this.toDoQueue.map(todo =>
+      todo.id == id ? { ...todo, status: 'Completed' } : todo
+    );
+
+    console.log('Updated ToDo List:', this.toDoQueue);
+  }
+
   newToDo: string = "";
 
   addNewToDo(newToDo: string){
