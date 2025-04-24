@@ -1,0 +1,11 @@
+nav a {
+    padding: 8px;
+    text-decoration: none;
+    margin-right: 10px;
+    color: black;
+}
+
+nav a.active {
+    font-weight: bold;
+    color: dodgerblue;
+}  

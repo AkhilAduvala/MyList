@@ -7,3 +7,6 @@
 <td>
   <button (click)="updateStatus()">Completed</button>
 </td>
+<td>
+  <a [routerLink]="['/todos', toDo.id]">View</a>
+</td>

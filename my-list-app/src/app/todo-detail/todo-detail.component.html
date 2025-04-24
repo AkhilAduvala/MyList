@@ -1,0 +1,9 @@
+@if (todo) {
+    <div>
+    <h2>TaskId: {{ todo.id }}</h2>
+    <p>Task Title: {{ todo.title }}</p>
+    <p>Status: {{ todo.status }}</p>
+    </div>
+} @else {
+    <p>No details found for the task</p>
+}

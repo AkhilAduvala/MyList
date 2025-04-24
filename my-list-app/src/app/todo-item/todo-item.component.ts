@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, Output, OnChanges, OnDestroy, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { ToDo } from '../models/todo.model';
 
 @Component({
   selector: '[app-todo-item]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './todo-item.component.html',
   styleUrl: './todo-item.component.css'
 })

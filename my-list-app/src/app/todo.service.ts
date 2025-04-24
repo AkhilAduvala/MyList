@@ -21,6 +21,10 @@ export class TodoService {
     return this.toDoQueue;
   }
 
+  getToDoById(id: number): ToDo | undefined{
+    return this.toDoQueue.find(x => x.id == id);
+  }
+
   addToDo(task: string): void{
     let newId = this.toDoQueue.length + 1;
     this.toDoQueue.push({id: newId, title: task, status: "Yet To Start"});
