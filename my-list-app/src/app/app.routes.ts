@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './auth.guard';
 //import { TodoListComponent } from './todo-list/todo-list.component'; // needed only if eager loading
 
 export const routes: Routes = [
@@ -14,7 +15,8 @@ export const routes: Routes = [
     },
     {
         path: 'admin',
-        loadComponent: () => import('./admin/admin.component').then(m => m.AdminComponent)
+        loadComponent: () => import('./admin/admin.component').then(m => m.AdminComponent),
+        canActivate: [authGuard]
     },
     {
         path: '',
