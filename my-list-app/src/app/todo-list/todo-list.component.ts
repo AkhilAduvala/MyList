@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ToDo } from '../models/todo.model';
 import { TodoItemComponent } from '../todo-item/todo-item.component';
+import { TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -13,48 +14,33 @@ import { TodoItemComponent } from '../todo-item/todo-item.component';
 
 export class TodoListComponent implements OnInit{
 
+  toDoQueue: ToDo[] = [];
+  newToDo: string = "";
+
+  constructor(private todoService: TodoService){};
+
   ngOnInit(): void {
       console.log("Welcome! Set, Track and Grow");
-      //implement below when learning service
-      //this.toDoQueue = this.toDoService.getToDos();
+      //implement below when learning service -> delegate the logic to handle data to service
+      this.toDoQueue = this.todoService.getToDos();
   }
 
-  toDoQueue: ToDo[] = [
-    {id: 1, title: "Morning Code", status: "Completed"},
-    {id: 2, title: "Brunch Learning", status: "In Progress"},
-    {id: 3, title: "Lunch Code", status: "Yet To Start"},
-    {id: 4, title: "Evening Learning", status: "Yet To Start"},
-    {id: 5, title: "Dinner Code", status: "Yet To Start"},
-    {id: 6, title: "Night Learning", status: "Yet To Start"}
-  ];
+  addNewToDo(newToDo: string): void{
+    this.todoService.addToDo(newToDo);
+    this.toDoQueue = this.todoService.getToDos();
+    this.newToDo = ""; //so the input will be cleared once the new todo is added to queue
+  }
 
-  handleDelete(id: number){
+  handleDelete(id: number): void{
     console.log(`we are removing the selected item with id : ${id} from queue`);
-    this.toDoQueue = this.toDoQueue.filter(item => item.id !== id);
+    this.todoService.deleteToDO(id);
+    this.toDoQueue = this.todoService.getToDos();
   }
 
-  markAsComplete(id: number) {
-    
-    /*
-    //mutation without reference change, so it will not reflect on UI
-
-    const todo = this.toDoQueue.find(t => t.id === id);
-    if (todo) {
-      //todo.status = 'Completed'; 
-    }
-    */
-
-    this.toDoQueue = this.toDoQueue.map(todo =>
-      todo.id == id ? { ...todo, status: 'Completed' } : todo
-    );
-
+  markAsComplete(id: number): void {
+    this.todoService.markAsCompleted(id);
+    this.toDoQueue = this.todoService.getToDos();
     console.log('Updated ToDo List:', this.toDoQueue);
   }
 
-  newToDo: string = "";
-
-  addNewToDo(newToDo: string){
-    this.toDoQueue.push({id: 7, title: newToDo, status: "Yet To Start"});
-    this.newToDo = ""; //so the input will be cleared once the new todo is added to queue
-  }
 }
