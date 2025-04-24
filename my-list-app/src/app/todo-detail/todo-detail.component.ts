@@ -5,6 +5,7 @@ import { TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-todo-detail',
+  standalone: true,
   imports: [],
   templateUrl: './todo-detail.component.html',
   styleUrl: './todo-detail.component.css'

@@ -1,9 +1,24 @@
 import { Routes } from '@angular/router';
-import { TodoListComponent } from './todo-list/todo-list.component';
-import { TodoDetailComponent } from './todo-detail/todo-detail.component';
+//import { TodoListComponent } from './todo-list/todo-list.component'; // needed only if eager loading
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'todos', pathMatch: 'full' },
-    { path: 'todos', component: TodoListComponent},
-    { path: 'todos/:id', component: TodoDetailComponent},
+    //{ path: 'todos', component: TodoListComponent}, //eager loading
+
+    {
+        path: 'todos',
+        loadComponent: () => import('./todo-list/todo-list.component').then(m => m.TodoListComponent)
+    },
+    {
+        path: 'todos/:id',
+        loadComponent: () => import('./todo-detail/todo-detail.component').then(m => m.TodoDetailComponent)
+    },
+    {
+        path: 'admin',
+        loadComponent: () => import('./admin/admin.component').then(m => m.AdminComponent)
+    },
+    {
+        path: '',
+        redirectTo: 'todos',
+        pathMatch: 'full'
+    }
 ];
